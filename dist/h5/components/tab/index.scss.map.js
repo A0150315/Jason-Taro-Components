@@ -1,0 +1,22 @@
+module.exports = {
+  "moreHeader": "index__moreHeader___2LkvI",
+  "selector": "index__selector___lPfy7",
+  "moreMain": "index__moreMain___22-bP",
+  "mask_show": "index__mask_show___QDuvj",
+  "mask": "index__mask___hgz8n",
+  "container": "index__container___1llj4",
+  "moreBg": "index__moreBg___yQK3k",
+  "moreBg_show": "index__moreBg_show___1s3oZ",
+  "title": "index__title___2TPIF",
+  "moreTabText": "index__moreTabText___3zUQD",
+  "moreTabText__highLight": "index__moreTabText__highLight___1SgwJ",
+  "outerScrollView": "index__outerScrollView___11_B6",
+  "outerScrollView_padding": "index__outerScrollView_padding___3E3OQ",
+  "scrollXBlock": "index__scrollXBlock___33Nbs",
+  "selector_fix": "index__selector_fix___2bkx3",
+  "selector_paddingTop": "index__selector_paddingTop___2CNlt",
+  "tabText": "index__tabText___2NQpp",
+  "tabText__highLight": "index__tabText__highLight___3Vniz",
+  "arrowIcon": "index__arrowIcon___320t1",
+  "tabWrapper": "index__tabWrapper___NKhB-"
+};
