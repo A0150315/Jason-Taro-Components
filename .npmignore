@@ -1,0 +1,9 @@
+src/
+config/
+
+.editorconfig
+.eslintrc
+package-lock
+project.config.json
+tsconfig.json
+yarn.lock
