@@ -1,0 +1,85 @@
+// 盒模型
+%flexWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+%flex {
+  display: flex;
+  align-items: center;
+}
+
+%flexSpaceBetween {
+  justify-content: space-between;
+
+  @extend %flex;
+}
+
+%flexSpaceAround {
+  justify-content: space-around;
+
+  @extend %flex;
+}
+
+//截字
+//SCSS 的”%” 与 “.” 功能类似，但是不会输出代码
+%ellipsis-basic {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 图片
+%fullPic {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+%aspectFillPic {
+  width: 100%;
+  height: 0;
+  background-position: center;
+  background-size: cover;
+}
+
+//文字超出后以...显示 支持多行
+@mixin fn-ellpisis($line) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  -webkit-line-clamp: $line;
+}
+
+// 动画
+@mixin animation-scale($name) {
+  @keyframes #{$name} {
+    0% {
+      transform: scale(.98);
+    }
+
+    50% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(.98);
+    }
+  }
+}
+
+%fade-in {
+  max-height: 100vh !important;
+  opacity: 1 !important;
+  transition: opacity .2s,
+    max-height 0s !important;
+}
+
+%fade-out {
+  max-height: 0;
+  opacity: 0;
+  transition: opacity .2s,
+    max-height 0s .2s;
+}
