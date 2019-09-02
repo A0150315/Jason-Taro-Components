@@ -14,6 +14,11 @@ var PullDownStatus;
   PullDownStatus[PullDownStatus["\u52A0\u8F7D\u5B8C\u6210"] = 3] = "\u52A0\u8F7D\u5B8C\u6210";
   PullDownStatus[PullDownStatus["\u7F51\u7EDC\u8FDE\u63A5\u9519\u8BEF"] = 4] = "\u7F51\u7EDC\u8FDE\u63A5\u9519\u8BEF";
 })(PullDownStatus || (PullDownStatus = {}));
+var ScrollDownStatus;
+(function (ScrollDownStatus) {
+  ScrollDownStatus[ScrollDownStatus["\u52A0\u8F7D\u4E2D"] = 0] = "\u52A0\u8F7D\u4E2D";
+  ScrollDownStatus[ScrollDownStatus["\u5DE6\u53F3\u6ED1\u52A8 \u67E5\u770B\u66F4\u591A"] = 1] = "\u5DE6\u53F3\u6ED1\u52A8 \u67E5\u770B\u66F4\u591A";
+})(ScrollDownStatus || (ScrollDownStatus = {}));
 const sleep = time => new Promise(resolve => {
   setTimeout(() => {
     resolve();
@@ -25,7 +30,7 @@ class Tab extends Taro.Component {
     const {
       children: children
     } = this.props;
-    const { className, style, onScrollToLower, onPullDown } = this.props;
+    const { className, style, onScrollToLower, onPullDown, disableOnScrollToLower = false } = this.props;
 
     const [isReadyToPull, setIsReadyToPull] = useState(true);
     const [pullDownBlockHeight, setPullDownBlockHeight] = useState(0);
@@ -33,6 +38,7 @@ class Tab extends Taro.Component {
     const [isTouching, setIsTouching] = useState(false);
     const [isLock, setIsLock] = useState(false);
     const [pullDownStatus, setPullDownStatus] = useState(0);
+    const [scrollDownStatus, setScrollDownStatus] = useState(1);
     const containerStyles = classNames('scrollYBlock', className);
     const moveHandler = useCallback(event => {
       let maxHeight = 0;
@@ -96,11 +102,14 @@ class Tab extends Taro.Component {
         setIsReadyToPull(cache);
       }
     };
-    return <ScrollView onScroll={scrollHandler} onTouchMove={moveHandler} onTouchStart={touchStartHandler} onTouchEnd={touchEndHandler} onScrollToUpper={event => scrollHandler(event, true)} onScrollToLower={() => {
+    return <ScrollView onScroll={scrollHandler} onTouchMove={moveHandler} onTouchStart={touchStartHandler} onTouchEnd={touchEndHandler} onScrollToUpper={event => scrollHandler(event, true)} onScrollToLower={async () => {
+      if (disableOnScrollToLower) return;
       if (onScrollToLower && !isOnScrollToLowerRunning) {
         isOnScrollToLowerRunning = true;
-        onScrollToLower();
+        setScrollDownStatus(0);
+        await onScrollToLower();
         setTimeout(() => {
+          setScrollDownStatus(1);
           isOnScrollToLowerRunning = false;
         }, 500);
       }
@@ -114,6 +123,7 @@ class Tab extends Taro.Component {
       <View className={isLock || pullDownBlockHeight > 0 ? 'listBlock' : ''}>
         {children}
       </View>
+      <View className="bottomText">{ScrollDownStatus[scrollDownStatus]}</View>
     </ScrollView>;
   }
 

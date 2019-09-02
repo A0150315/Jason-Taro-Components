@@ -12,6 +12,7 @@ interface TabPanelProps {
   children?: any
   onScrollToLower?: () => void
   onPullDown?: () => Promise<any> | void
+  disableOnScrollToLower?: boolean
 }
 
 let cache: any = true
@@ -24,6 +25,10 @@ enum PullDownStatus {
   '加载中',
   '加载完成',
   '网络连接错误'
+}
+enum ScrollDownStatus {
+  '加载中',
+  '左右滑动 查看更多'
 }
 
 const sleep = time =>
@@ -38,7 +43,8 @@ const Tab: FunctionComponent<TabPanelProps> = ({
   style,
   children,
   onScrollToLower,
-  onPullDown
+  onPullDown,
+  disableOnScrollToLower = false
 }) => {
   const [isReadyToPull, setIsReadyToPull] = useState(true)
   const [pullDownBlockHeight, setPullDownBlockHeight] = useState(0)
@@ -46,6 +52,7 @@ const Tab: FunctionComponent<TabPanelProps> = ({
   const [isTouching, setIsTouching] = useState(false)
   const [isLock, setIsLock] = useState(false)
   const [pullDownStatus, setPullDownStatus] = useState(0)
+  const [scrollDownStatus, setScrollDownStatus] = useState(1)
   const containerStyles = classNames('scrollYBlock', className)
 
   const moveHandler = useCallback(
@@ -133,11 +140,14 @@ const Tab: FunctionComponent<TabPanelProps> = ({
       onTouchStart={touchStartHandler}
       onTouchEnd={touchEndHandler}
       onScrollToUpper={event => scrollHandler(event, true)}
-      onScrollToLower={() => {
+      onScrollToLower={async () => {
+        if (disableOnScrollToLower) return
         if (onScrollToLower && !isOnScrollToLowerRunning) {
           isOnScrollToLowerRunning = true
-          onScrollToLower()
+          setScrollDownStatus(0)
+          await onScrollToLower()
           setTimeout(() => {
+            setScrollDownStatus(1)
             isOnScrollToLowerRunning = false
           }, 500)
         }
@@ -160,6 +170,7 @@ const Tab: FunctionComponent<TabPanelProps> = ({
       <View className={isLock || pullDownBlockHeight > 0 ? 'listBlock' : ''}>
         {children}
       </View>
+      <View className='bottomText'>{ScrollDownStatus[scrollDownStatus]}</View>
     </ScrollView>
   )
 }
