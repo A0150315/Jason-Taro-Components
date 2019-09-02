@@ -1,5 +1,6 @@
 src/
 config/
+.temp/
 
 .editorconfig
 .eslintrc
