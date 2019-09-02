@@ -36,7 +36,21 @@ export default class Index extends Component {
                 }}
                 onScrollToLower={() => console.log(1)}
               >
-                {[1, 2, 3, 2, 3, 2, 3, 1, 2, 2, 3, 4].map((item, idx) => (
+                {[
+                  1,
+                  2,
+                  3,
+                  2,
+                  3,
+                  2,
+                  3,
+                  1,
+                  3,
+                  2,
+                  3,
+                  2,
+                  3,
+                ].map((item, idx) => (
                   <View>item</View>
                 ))}
               </TabPanel>
