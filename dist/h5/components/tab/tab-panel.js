@@ -33,7 +33,7 @@ class Tab extends Taro.Component {
     const [isTouching, setIsTouching] = useState(false);
     const [isLock, setIsLock] = useState(false);
     const [pullDownStatus, setPullDownStatus] = useState(0);
-    const containerStyles = classNames("scrollYBlock", className);
+    const containerStyles = classNames('scrollYBlock', className);
     const moveHandler = useCallback(event => {
       let maxHeight = 0;
       if (isApp) {
@@ -42,7 +42,9 @@ class Tab extends Taro.Component {
         maxHeight = document.querySelector('html').style.fontSize.slice(0, -2) * 1.0666667;
       }
       const time = isApp ? 0.5 : 0.2;
-      const height = (event.touches[0].clientY - startPosition) * time;
+      console.log('1', 1);
+      let height = (event.touches[0].clientY - startPosition) * time;
+      if (isApp && height < 0) height = 0;
       if (isReadyToPull) {
         if ((pullDownBlockHeight > 0 || height > 0) && startPosition !== -1) {
           event.preventDefault();
@@ -106,10 +108,10 @@ class Tab extends Taro.Component {
       <View style={{
         height: `${pullDownBlockHeight}${isApp ? 'r' : ''}px`,
         lineHeight: `${pullDownBlockHeight * 1.2}${isApp ? 'r' : ''}px`
-      }} className={`${"pullDownBlock"} ${isTouching ? '' : "pullDownBlock_withTransition"}`}>
+      }} className={`${'pullDownBlock'} ${isTouching ? '' : 'pullDownBlock_withTransition'}`}>
         {PullDownStatus[pullDownStatus]}
       </View>
-      <View className={isLock || pullDownBlockHeight > 0 ? "listBlock" : ''}>
+      <View className={isLock || pullDownBlockHeight > 0 ? 'listBlock' : ''}>
         {children}
       </View>
     </ScrollView>;
