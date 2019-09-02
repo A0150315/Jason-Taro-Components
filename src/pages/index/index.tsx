@@ -22,12 +22,13 @@ export default class Index extends Component {
         <Tab
           // hasTop
           // fixable
-          tab={[1, 2, 3, 2, 3, 4, 5, 62, 3, 4, 5, 64, 5, 6]}
+          tab={['动画', '大多数', '大法', '动画']}
           getIndex={getIndex => {
             console.log('getIndex', getIndex)
           }}
+          mode='common'
         >
-          {[1, 2, 3, 4, 5].map((item, idx) => {
+          {[1, 2, 3, 4].map((item, idx) => {
             return (
               <TabPanel
                 key={idx}
@@ -46,10 +47,7 @@ export default class Index extends Component {
                   3,
                   1,
                   3,
-                  2,
-                  3,
-                  2,
-                  3,
+
                 ].map((item, idx) => (
                   <View>item</View>
                 ))}

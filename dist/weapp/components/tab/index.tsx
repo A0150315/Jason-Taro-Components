@@ -14,6 +14,7 @@ import './index.scss'
 interface TabProps {
   className?: string
   style?: string | CSSProperties
+  mode?: 'common'
   children?: any
   tab: string[]
   getIndex?: (index: number) => void
@@ -32,10 +33,12 @@ const Tab: FunctionComponent<TabProps> = ({
   style,
   children,
   tab = [],
-  getIndex
+  getIndex,
+  mode
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isShowMore, setIsShowMore] = useState(false)
+  const [isShowArrow, setIsShowArrow] = useState(mode !== 'common')
   const containerStyles = classNames('container', className)
 
   const selectorStyles = useMemo(
@@ -70,12 +73,21 @@ const Tab: FunctionComponent<TabProps> = ({
     [isShowMore]
   )
 
+  const tabWrapperStyles = useMemo(
+    () =>
+      classNames('tabWrapper', {
+        ['tabWrapper_common']: !isShowArrow
+      }),
+    [isShowArrow]
+  )
+
   const tabTextStyles = useCallback(
     index =>
       classNames('tabText', {
-        ['tabText__highLight']: index === currentIndex
+        ['tabText__highLight']: index === currentIndex,
+        ['tabText__noMargin']: !isShowArrow
       }),
-    [currentIndex]
+    [currentIndex, isShowArrow]
   )
   const moreTextStyles = useCallback(
     index =>
@@ -134,7 +146,7 @@ const Tab: FunctionComponent<TabProps> = ({
         <ScrollView
           scrollIntoView={`tab${currentIndex}`}
           scrollX
-          className='tabWrapper'
+          className={tabWrapperStyles}
         >
           {tab.map((title, index) => (
             <Text
@@ -147,7 +159,7 @@ const Tab: FunctionComponent<TabProps> = ({
             </Text>
           ))}
         </ScrollView>
-        {!!tab.length && (
+        {!!tab.length && isShowArrow && (
           <Image
             onClick={showMask}
             className='arrowIcon'

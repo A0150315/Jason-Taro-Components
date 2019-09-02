@@ -13,10 +13,11 @@ class Tab extends Taro.Component {
     const {
       children: children
     } = this.props;
-    const { fixable = false, hasTop = false, className, style, tab = [], getIndex } = this.props;
+    const { fixable = false, hasTop = false, className, style, tab = [], getIndex, mode } = this.props;
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isShowMore, setIsShowMore] = useState(false);
+    const [isShowArrow, setIsShowArrow] = useState(mode !== 'common');
     const containerStyles = classNames('container', className);
     const selectorStyles = useMemo(() => classNames('selector', {
       ['selector_fix']: fixable,
@@ -31,9 +32,13 @@ class Tab extends Taro.Component {
     const moreBgStyles = useMemo(() => classNames('moreBg', {
       ['moreBg_show']: isShowMore
     }), [isShowMore]);
+    const tabWrapperStyles = useMemo(() => classNames('tabWrapper', {
+      ['tabWrapper_common']: !isShowArrow
+    }), [isShowArrow]);
     const tabTextStyles = useCallback(index => classNames('tabText', {
-      ['tabText__highLight']: index === currentIndex
-    }), [currentIndex]);
+      ['tabText__highLight']: index === currentIndex,
+      ['tabText__noMargin']: !isShowArrow
+    }), [currentIndex, isShowArrow]);
     const moreTextStyles = useCallback(index => classNames('moreTabText', {
       ['moreTabText__highLight']: index === currentIndex
     }), [currentIndex]);
@@ -69,12 +74,12 @@ class Tab extends Taro.Component {
       
       
       <View className={selectorStyles}>
-        <ScrollView scrollIntoView={`tab${currentIndex}`} scrollX className="tabWrapper">
+        <ScrollView scrollIntoView={`tab${currentIndex}`} scrollX className={tabWrapperStyles}>
           {tab.map((title, index) => <Text id={`tab${index}`} className={tabTextStyles(index)} onClick={() => setCurrentIndex(index)} key={`tab:${index}`}>
               {title.length > 4 ? `${title.substr(0, 4)}...` : title}
             </Text>)}
         </ScrollView>
-        {!!tab.length && <Image onClick={showMask} className="arrowIcon" src="https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_expand.svg" />}
+        {!!tab.length && isShowArrow && <Image onClick={showMask} className="arrowIcon" src="https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_expand.svg" />}
       </View>
       <View className={outerScrollViewStyles} onTouchStart={event => {
         startPosition = event.touches[0].pageX;
