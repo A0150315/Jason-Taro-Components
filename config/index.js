@@ -25,7 +25,7 @@ const cssModules = {
 };
 
 const config = {
-  projectName: 'Jason-taro-components',
+  projectName: 'jason-taro-components',
   date: '2019-2-13',
   designWidth: 750,
   deviceRatio: {
@@ -115,7 +115,7 @@ if (process.env.TARO_BUILD_TYPE === 'ui') {
         path: path.join(process.cwd(), 'dist', 'h5'),
         filename: 'index.js',
         libraryTarget: 'umd',
-        library: 'taro-ui-sample'
+        library: 'jason-taro-components'
       },
       externals: {
         nervjs: 'commonjs2 nervjs',
