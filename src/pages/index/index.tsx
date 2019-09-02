@@ -5,6 +5,9 @@ import Tab from '../../components/tab'
 import './index.scss'
 
 export default class Index extends Component {
+  state = {
+    list: [1, 2, 3, 2, 3, 2, 3, 1, 3, 1, 2, 3, 2, 3, 1, 3]
+  }
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -22,7 +25,7 @@ export default class Index extends Component {
         <Tab
           // hasTop
           // fixable
-          tab={['动画', '大多数', '大法', '动画']}
+          tab={['标签1', '标签2', '标签3', '标签4']}
           getIndex={getIndex => {
             console.log('getIndex', getIndex)
           }}
@@ -33,23 +36,32 @@ export default class Index extends Component {
               <TabPanel
                 key={idx}
                 onPullDown={() => {
-                  console.log(2)
+                  this.setState({
+                    list: [1, 2, 3, 2, 3, 2, 3, 1, 3, 1, 2, 3, 2, 3, 1, 3]
+                  })
                 }}
-                onScrollToLower={() => console.log(1)}
+                onScrollToLower={() =>
+                  this.setState({
+                    list: [
+                      ...this.state.list,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1,
+                      1
+                    ]
+                  })
+                }
               >
-                {[
-                  1,
-                  2,
-                  3,
-                  2,
-                  3,
-                  2,
-                  3,
-                  1,
-                  3,
-
-                ].map((item, idx) => (
-                  <View>item</View>
+                {this.state.list.map((item, idx) => (
+                  <View className='item'>item{idx}</View>
                 ))}
               </TabPanel>
             )

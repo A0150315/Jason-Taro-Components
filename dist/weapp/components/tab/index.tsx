@@ -38,7 +38,7 @@ const Tab: FunctionComponent<TabProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isShowMore, setIsShowMore] = useState(false)
-  const [isShowArrow, setIsShowArrow] = useState(mode !== 'common')
+  const [isShowArrow] = useState(mode !== 'common')
   const containerStyles = classNames('container', className)
 
   const selectorStyles = useMemo(
@@ -82,10 +82,11 @@ const Tab: FunctionComponent<TabProps> = ({
   )
 
   const tabTextStyles = useCallback(
-    index =>
+    (index, canScroll = false) =>
       classNames('tabText', {
         ['tabText__highLight']: index === currentIndex,
-        ['tabText__noMargin']: !isShowArrow
+        ['tabText__noMargin']: !isShowArrow,
+        ['tabText__canScroll']: canScroll
       }),
     [currentIndex, isShowArrow]
   )
@@ -142,31 +143,48 @@ const Tab: FunctionComponent<TabProps> = ({
       </View>
       {/* </View> */}
       {/* )} */}
-      <View className={selectorStyles}>
-        <ScrollView
-          scrollIntoView={`tab${currentIndex}`}
-          scrollX
-          className={tabWrapperStyles}
-        >
-          {tab.map((title, index) => (
-            <Text
-              id={`tab${index}`}
-              className={tabTextStyles(index)}
-              onClick={() => setCurrentIndex(index)}
-              key={`tab:${index}`}
-            >
-              {title.length > 4 ? `${title.substr(0, 4)}...` : title}
-            </Text>
-          ))}
-        </ScrollView>
-        {!!tab.length && isShowArrow && (
-          <Image
-            onClick={showMask}
-            className='arrowIcon'
-            src='https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_expand.svg'
-          />
-        )}
-      </View>
+      {isShowArrow ? (
+        <View className={selectorStyles}>
+          <ScrollView
+            scrollIntoView={`tab${currentIndex}`}
+            scrollX
+            className={tabWrapperStyles}
+          >
+            {tab.map((title, index) => (
+              <Text
+                id={`tab${index}`}
+                className={tabTextStyles(index, true)}
+                onClick={() => setCurrentIndex(index)}
+                key={`tab:${index}`}
+              >
+                {title.length > 4 ? `${title.substr(0, 4)}...` : title}
+              </Text>
+            ))}
+          </ScrollView>
+          {!!tab.length && (
+            <Image
+              onClick={showMask}
+              className='arrowIcon'
+              src='https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_expand.svg'
+            />
+          )}
+        </View>
+      ) : (
+        <View className={selectorStyles}>
+          <View className={tabWrapperStyles}>
+            {tab.map((title, index) => (
+              <Text
+                id={`tab${index}`}
+                className={tabTextStyles(index)}
+                onClick={() => setCurrentIndex(index)}
+                key={`tab:${index}`}
+              >
+                {title.length > 4 ? `${title.substr(0, 4)}...` : title}
+              </Text>
+            ))}
+          </View>
+        </View>
+      )}
       <View
         className={outerScrollViewStyles}
         onTouchStart={event => {
