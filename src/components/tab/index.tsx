@@ -9,7 +9,7 @@ import Taro, {
 import { View, Text, Image, ScrollView } from '@tarojs/components'
 import classNames from 'classnames'
 import { getEnv } from 'utils/utils'
-import styles from './index.scss'
+import './index.scss'
 
 interface TabProps {
   className?: string
@@ -36,51 +36,51 @@ const Tab: FunctionComponent<TabProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isShowMore, setIsShowMore] = useState(false)
-  const containerStyles = classNames(styles.container, className)
+  const containerStyles = classNames('container', className)
 
   const selectorStyles = useMemo(
     () =>
-      classNames(styles.selector, {
-        [styles.selector_fix]: fixable,
-        [styles.selector_paddingTop]: hasTop
+      classNames('selector', {
+        ['selector_fix']: fixable,
+        ['selector_paddingTop']: hasTop
       }),
     [fixable, hasTop]
   )
 
   const outerScrollViewStyles = useMemo(
     () =>
-      classNames(styles.outerScrollView, {
-        [styles.outerScrollView_padding]: fixable
+      classNames('outerScrollView', {
+        ['outerScrollView_padding']: fixable
       }),
     [fixable]
   )
 
   const maskStyles = useMemo(
     () =>
-      classNames(styles.mask, {
-        [styles.mask_show]: isShowMore
+      classNames('mask', {
+        ['mask_show']: isShowMore
       }),
     [isShowMore]
   )
   const moreBgStyles = useMemo(
     () =>
-      classNames(styles.moreBg, {
-        [styles.moreBg_show]: isShowMore
+      classNames('moreBg', {
+        ['moreBg_show']: isShowMore
       }),
     [isShowMore]
   )
 
   const tabTextStyles = useCallback(
     index =>
-      classNames(styles.tabText, {
-        [styles.tabText__highLight]: index === currentIndex
+      classNames('tabText', {
+        ['tabText__highLight']: index === currentIndex
       }),
     [currentIndex]
   )
   const moreTextStyles = useCallback(
     index =>
-      classNames(styles.moreTabText, {
-        [styles.moreTabText__highLight]: index === currentIndex
+      classNames('moreTabText', {
+        ['moreTabText__highLight']: index === currentIndex
       }),
     [currentIndex]
   )
@@ -102,18 +102,18 @@ const Tab: FunctionComponent<TabProps> = ({
   return (
     <View className={containerStyles} style={style}>
       {/* {isShowMore && ( */}
-      {/* <View className={styles.moreContainer}> */}
+      {/* <View className={"moreContainer"}> */}
       <View className={maskStyles} onClick={hideMask} />
       <View className={moreBgStyles}>
-        <View className={styles.moreHeader}>
-          <Text className={styles.title}>全部分类</Text>
+        <View className='moreHeader'>
+          <Text className='title'>全部分类</Text>
           <Image
             onClick={hideMask}
-            className={styles.arrowIcon}
+            className='arrowIcon'
             src='https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_close.svg'
           />
         </View>
-        <View className={styles.moreMain}>
+        <View className='moreMain'>
           {tab.map((title, index) => (
             <View
               className={moreTextStyles(index)}
@@ -134,7 +134,7 @@ const Tab: FunctionComponent<TabProps> = ({
         <ScrollView
           scrollIntoView={`tab${currentIndex}`}
           scrollX
-          className={styles.tabWrapper}
+          className='tabWrapper'
         >
           {tab.map((title, index) => (
             <Text
@@ -150,7 +150,7 @@ const Tab: FunctionComponent<TabProps> = ({
         {!!tab.length && (
           <Image
             onClick={showMask}
-            className={styles.arrowIcon}
+            className='arrowIcon'
             src='https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_expand.svg'
           />
         )}
@@ -183,7 +183,7 @@ const Tab: FunctionComponent<TabProps> = ({
       >
         {/* 列表 */}
         <View
-          className={styles.scrollXBlock}
+          className='scrollXBlock'
           style={{
             width: `${tab.length}00vw`,
             transform: `translate(-${currentIndex}00vw)`

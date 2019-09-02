@@ -17,7 +17,7 @@ const autoprefixer = {
 };
 
 const cssModules = {
-  enable: true,
+  enable: false,
   config: {
     generateScopedName,
     namingPattern: 'global', // 转换模式，取值为 global/module

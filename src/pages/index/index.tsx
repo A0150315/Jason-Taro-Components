@@ -2,7 +2,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import TabPanel from '../../components/tab/tab-panel'
 import Tab from '../../components/tab'
-import styles from './index.scss'
+import './index.scss'
 
 export default class Index extends Component {
   /**
@@ -18,7 +18,7 @@ export default class Index extends Component {
 
   render() {
     return (
-      <View className={styles.wrapper}>
+      <View className='wrapper'>
         <Tab
           // hasTop
           // fixable
@@ -36,23 +36,7 @@ export default class Index extends Component {
                 }}
                 onScrollToLower={() => console.log(1)}
               >
-                {[
-                  1,
-                  2,
-                  3,
-                  2,
-                  3,
-                  ,
-                  2,
-                  3,
-                  1,
-                  2,
-                  ,
-                  2,
-                  3,
-                  ,
-                  4
-                ].map((item, idx) => (
+                {[1, 2, 3, 2, 3, , 2, 3, 1, 2, , 2, 3, , 4].map((item, idx) => (
                   <View>{item}111</View>
                 ))}
               </TabPanel>

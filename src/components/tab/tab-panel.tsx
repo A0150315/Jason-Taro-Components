@@ -2,7 +2,7 @@ import { CSSProperties } from 'react'
 import Taro, { FunctionComponent, useState, useCallback } from '@tarojs/taro'
 import { ScrollView, View } from '@tarojs/components'
 import classNames from 'classnames'
-import styles from './tab-panel.scss'
+import './tab-panel.scss'
 
 const isApp = Taro.getEnv() !== 'WEB'
 
@@ -46,7 +46,7 @@ const Tab: FunctionComponent<TabPanelProps> = ({
   const [isTouching, setIsTouching] = useState(false)
   const [isLock, setIsLock] = useState(false)
   const [pullDownStatus, setPullDownStatus] = useState(0)
-  const containerStyles = classNames(styles.scrollYBlock, className)
+  const containerStyles = classNames("scrollYBlock", className)
 
   const moveHandler = useCallback(
     event => {
@@ -150,14 +150,14 @@ const Tab: FunctionComponent<TabPanelProps> = ({
           height: `${pullDownBlockHeight}${isApp ? 'r' : ''}px`,
           lineHeight: `${pullDownBlockHeight * 1.2}${isApp ? 'r' : ''}px`
         }}
-        className={`${styles.pullDownBlock} ${
-          isTouching ? '' : styles.pullDownBlock_withTransition
+        className={`${"pullDownBlock"} ${
+          isTouching ? '' : "pullDownBlock_withTransition"
         }`}
       >
         {PullDownStatus[pullDownStatus]}
       </View>
       <View
-        className={isLock || pullDownBlockHeight > 0 ? styles.listBlock : ''}
+        className={isLock || pullDownBlockHeight > 0 ? "listBlock" : ''}
       >
         {children}
       </View>

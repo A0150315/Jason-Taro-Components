@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect, useMemo } from "@tarojs/taro-h5";
 import { View, Text, Image, ScrollView } from '@tarojs/components';
 import classNames from 'classnames';
 import { getEnv } from "../../utils/utils";
-import styles from './index.scss';
+import './index.scss';
 let startPosition = 0;
 const standard = 100;
 let hasMoved = false;
@@ -17,25 +17,25 @@ class Tab extends Taro.Component {
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isShowMore, setIsShowMore] = useState(false);
-    const containerStyles = classNames(styles.container, className);
-    const selectorStyles = useMemo(() => classNames(styles.selector, {
-      [styles.selector_fix]: fixable,
-      [styles.selector_paddingTop]: hasTop
+    const containerStyles = classNames('container', className);
+    const selectorStyles = useMemo(() => classNames('selector', {
+      ['selector_fix']: fixable,
+      ['selector_paddingTop']: hasTop
     }), [fixable, hasTop]);
-    const outerScrollViewStyles = useMemo(() => classNames(styles.outerScrollView, {
-      [styles.outerScrollView_padding]: fixable
+    const outerScrollViewStyles = useMemo(() => classNames('outerScrollView', {
+      ['outerScrollView_padding']: fixable
     }), [fixable]);
-    const maskStyles = useMemo(() => classNames(styles.mask, {
-      [styles.mask_show]: isShowMore
+    const maskStyles = useMemo(() => classNames('mask', {
+      ['mask_show']: isShowMore
     }), [isShowMore]);
-    const moreBgStyles = useMemo(() => classNames(styles.moreBg, {
-      [styles.moreBg_show]: isShowMore
+    const moreBgStyles = useMemo(() => classNames('moreBg', {
+      ['moreBg_show']: isShowMore
     }), [isShowMore]);
-    const tabTextStyles = useCallback(index => classNames(styles.tabText, {
-      [styles.tabText__highLight]: index === currentIndex
+    const tabTextStyles = useCallback(index => classNames('tabText', {
+      ['tabText__highLight']: index === currentIndex
     }), [currentIndex]);
-    const moreTextStyles = useCallback(index => classNames(styles.moreTabText, {
-      [styles.moreTabText__highLight]: index === currentIndex
+    const moreTextStyles = useCallback(index => classNames('moreTabText', {
+      ['moreTabText__highLight']: index === currentIndex
     }), [currentIndex]);
     const showMask = useCallback(() => setIsShowMore(true), []);
     const hideMask = useCallback(() => setIsShowMore(false), []);
@@ -53,11 +53,11 @@ class Tab extends Taro.Component {
       
       <View className={maskStyles} onClick={hideMask} />
       <View className={moreBgStyles}>
-        <View className={styles.moreHeader}>
-          <Text className={styles.title}>全部分类</Text>
-          <Image onClick={hideMask} className={styles.arrowIcon} src="https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_close.svg" />
+        <View className="moreHeader">
+          <Text className="title">全部分类</Text>
+          <Image onClick={hideMask} className="arrowIcon" src="https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_close.svg" />
         </View>
-        <View className={styles.moreMain}>
+        <View className="moreMain">
           {tab.map((title, index) => <View className={moreTextStyles(index)} onClick={() => {
             hideMask();
             setCurrentIndex(index);
@@ -69,12 +69,12 @@ class Tab extends Taro.Component {
       
       
       <View className={selectorStyles}>
-        <ScrollView scrollIntoView={`tab${currentIndex}`} scrollX className={styles.tabWrapper}>
+        <ScrollView scrollIntoView={`tab${currentIndex}`} scrollX className="tabWrapper">
           {tab.map((title, index) => <Text id={`tab${index}`} className={tabTextStyles(index)} onClick={() => setCurrentIndex(index)} key={`tab:${index}`}>
               {title.length > 4 ? `${title.substr(0, 4)}...` : title}
             </Text>)}
         </ScrollView>
-        {!!tab.length && <Image onClick={showMask} className={styles.arrowIcon} src="https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_expand.svg" />}
+        {!!tab.length && <Image onClick={showMask} className="arrowIcon" src="https://jiayixueyuan.oss-cn-shenzhen.aliyuncs.com/h5/arrow_expand.svg" />}
       </View>
       <View className={outerScrollViewStyles} onTouchStart={event => {
         startPosition = event.touches[0].pageX;
@@ -90,7 +90,7 @@ class Tab extends Taro.Component {
         hasMoved = false;
       }}>
         
-        <View className={styles.scrollXBlock} style={{
+        <View className="scrollXBlock" style={{
           width: `${tab.length}00vw`,
           transform: `translate(-${currentIndex}00vw)`
         }}>
