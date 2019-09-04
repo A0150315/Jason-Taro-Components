@@ -34,12 +34,14 @@ export default class Index extends Component {
           {[1, 2, 3, 4].map((item, idx) => {
             return (
               <TabPanel
+                // disableOnScrollToLower
                 key={idx}
                 onPullDown={() => {
                   this.setState({
                     list: [1, 2, 3, 2, 3, 2, 3, 1, 3, 1, 2, 3, 2, 3, 1, 3]
                   })
                 }}
+                // bottomText="11212"
                 onScrollToLower={() =>
                   this.setState({
                     list: [
@@ -60,6 +62,7 @@ export default class Index extends Component {
                   })
                 }
               >
+                {/* <View style={{ height: 'calc(99vh - 98px)' }}>11</View> */}
                 {this.state.list.map((item, idx) => (
                   <View className='item'>item{idx}</View>
                 ))}

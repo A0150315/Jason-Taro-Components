@@ -15,18 +15,19 @@
     "sourceMap": true,
     "baseUrl": ".",
     "rootDir": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "components/*": ["./src/components/*"],
+      "models": ["./src/models/index.ts"],
+      "utils/*": ["./src/utils/*"],
+      "package": ["./package.json"],
+      "styles/*": ["./src/styles/*"]
+    },
     "jsx": "preserve",
+    "lib": ["esnext", "dom"],
     "jsxFactory": "Taro.createElement",
     "allowJs": true,
-    "resolveJsonModule": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "global.d.ts"
-    ]
+    "typeRoots": ["node_modules/@types", "./src/typings"]
   },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
   "compileOnSave": false
 }
