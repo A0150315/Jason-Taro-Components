@@ -198,8 +198,10 @@ const Tab: FunctionComponent<TabPanelProps> = ({
       {children}
       {/* </View> */}
       {bottomText !== false && (
-        <View className='bottomText'>
-          {bottomText || ScrollDownStatus[scrollDownStatus]}
+        <View className="bottomText">
+          {bottomText === true
+            ? ScrollDownStatus[scrollDownStatus]
+            : bottomText}
         </View>
       )}
     </ScrollView>
