@@ -1,10 +1,12 @@
 import Nerv from "nervjs";
-import Taro, { useState, useCallback } from "@tarojs/taro-h5";
+import Taro, { useState, useCallback, useEffect } from "@tarojs/taro-h5";
 import { ScrollView, View } from '@tarojs/components';
 import classNames from 'classnames';
+import { getEnv } from "../../utils/utils";
 import './tab-panel.scss';
 const isApp = Taro.getEnv() !== 'WEB';
 let cache = true;
+let isTouching = false;
 let isOnScrollToLowerRunning = false;
 var PullDownStatus;
 (function (PullDownStatus) {
@@ -30,12 +32,12 @@ class Tab extends Taro.Component {
     const {
       children: children
     } = this.props;
-    const { className, style, onScrollToLower, onPullDown, disableOnScrollToLower = false } = this.props;
+    const { className, style, onScrollToLower, onPullDown, disableOnScrollToLower = false, bottomText } = this.props;
 
     const [isReadyToPull, setIsReadyToPull] = useState(true);
     const [pullDownBlockHeight, setPullDownBlockHeight] = useState(0);
     const [startPosition, setStartPosition] = useState(-1);
-    const [isTouching, setIsTouching] = useState(false);
+    // const [isTouching, setIsTouching] = useState(false)
     const [isLock, setIsLock] = useState(false);
     const [pullDownStatus, setPullDownStatus] = useState(0);
     const [scrollDownStatus, setScrollDownStatus] = useState(1);
@@ -48,7 +50,6 @@ class Tab extends Taro.Component {
         maxHeight = document.querySelector('html').style.fontSize.slice(0, -2) * 1.0666667;
       }
       const time = isApp ? 0.5 : 0.2;
-      console.log('1', 1);
       let height = (event.touches[0].clientY - startPosition) * time;
       if (isApp && height < 0) height = 0;
       if (isReadyToPull) {
@@ -62,13 +63,13 @@ class Tab extends Taro.Component {
       }
     }, [pullDownBlockHeight, startPosition, isReadyToPull, isLock]);
     const touchStartHandler = event => {
-      setIsTouching(true);
+      isTouching = true;
       if (isReadyToPull) {
         setStartPosition(event.touches[0].clientY);
       }
     };
     const touchEndHandler = useCallback(async () => {
-      setIsTouching(false);
+      isTouching = false;
       setIsReadyToPull(cache);
       setIsLock(true);
       setStartPosition(-1);
@@ -89,6 +90,7 @@ class Tab extends Taro.Component {
       } else if (pullDownStatus === 2 || pullDownStatus === 3 || pullDownStatus === 4) {
         return;
       }
+      // alert(1)
       setPullDownBlockHeight(0);
       setTimeout(() => {
         setIsLock(false);
@@ -102,7 +104,23 @@ class Tab extends Taro.Component {
         setIsReadyToPull(cache);
       }
     };
-    return <ScrollView onScroll={scrollHandler} onTouchMove={moveHandler} onTouchStart={touchStartHandler} onTouchEnd={touchEndHandler} onScrollToUpper={event => scrollHandler(event, true)} onScrollToLower={async () => {
+    const initStatus = () => {
+      isTouching = false;
+      setIsReadyToPull(cache);
+      setIsLock(false);
+      setStartPosition(-1);
+      setPullDownStatus(0);
+      setPullDownBlockHeight(0);
+    };
+    useEffect(() => {
+      if (getEnv() !== 'WEAPP') window.addEventListener('touchcancel', initStatus);
+      return () => {
+        if (getEnv() !== 'WEAPP') window.removeEventListener('touchcancel', initStatus);
+      };
+    }, []);
+    return <ScrollView onScroll={scrollHandler} onTouchMove={moveHandler} onTouchStart={touchStartHandler} onTouchEnd={touchEndHandler} onScrollToUpper={event => {
+      if (getEnv() === 'WEAPP') scrollHandler(event, true);
+    }} onScrollToLower={async () => {
       if (disableOnScrollToLower) return;
       if (onScrollToLower && !isOnScrollToLowerRunning) {
         isOnScrollToLowerRunning = true;
@@ -120,10 +138,12 @@ class Tab extends Taro.Component {
       }} className={`${'pullDownBlock'} ${isTouching ? '' : 'pullDownBlock_withTransition'}`}>
         {PullDownStatus[pullDownStatus]}
       </View>
-      <View className={isLock || pullDownBlockHeight > 0 ? 'listBlock' : ''}>
-        {children}
-      </View>
-      <View className="bottomText">{ScrollDownStatus[scrollDownStatus]}</View>
+      
+      {children}
+      
+      {bottomText !== false && <View className="bottomText">
+          {bottomText || ScrollDownStatus[scrollDownStatus]}
+        </View>}
     </ScrollView>;
   }
 

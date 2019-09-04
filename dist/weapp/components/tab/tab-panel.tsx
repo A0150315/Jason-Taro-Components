@@ -1,13 +1,20 @@
 import { CSSProperties } from 'react'
-import Taro, { FunctionComponent, useState, useCallback } from '@tarojs/taro'
+import Taro, {
+  FunctionComponent,
+  useState,
+  useCallback,
+  useEffect
+} from '@tarojs/taro'
 import { ScrollView, View } from '@tarojs/components'
 import classNames from 'classnames'
+import { getEnv } from 'utils/utils'
 import './tab-panel.scss'
 
 const isApp = Taro.getEnv() !== 'WEB'
 
 interface TabPanelProps {
   className?: string
+  bottomText?: boolean | string
   style?: string | CSSProperties
   children?: any
   onScrollToLower?: () => void
@@ -16,6 +23,7 @@ interface TabPanelProps {
 }
 
 let cache: any = true
+let isTouching = false
 
 let isOnScrollToLowerRunning = false
 
@@ -44,12 +52,13 @@ const Tab: FunctionComponent<TabPanelProps> = ({
   children,
   onScrollToLower,
   onPullDown,
-  disableOnScrollToLower = false
+  disableOnScrollToLower = false,
+  bottomText
 }) => {
   const [isReadyToPull, setIsReadyToPull] = useState(true)
   const [pullDownBlockHeight, setPullDownBlockHeight] = useState(0)
   const [startPosition, setStartPosition] = useState(-1)
-  const [isTouching, setIsTouching] = useState(false)
+  // const [isTouching, setIsTouching] = useState(false)
   const [isLock, setIsLock] = useState(false)
   const [pullDownStatus, setPullDownStatus] = useState(0)
   const [scrollDownStatus, setScrollDownStatus] = useState(1)
@@ -66,10 +75,8 @@ const Tab: FunctionComponent<TabPanelProps> = ({
       }
 
       const time = isApp ? 0.5 : 0.2
-      console.log('1', 1)
       let height = (event.touches[0].clientY - startPosition) * time
       if (isApp && height < 0) height = 0
-
       if (isReadyToPull) {
         if ((pullDownBlockHeight > 0 || height > 0) && startPosition !== -1) {
           event.preventDefault()
@@ -85,14 +92,14 @@ const Tab: FunctionComponent<TabPanelProps> = ({
   )
 
   const touchStartHandler = event => {
-    setIsTouching(true)
+    isTouching = true
     if (isReadyToPull) {
       setStartPosition(event.touches[0].clientY)
     }
   }
 
   const touchEndHandler = useCallback(async () => {
-    setIsTouching(false)
+    isTouching = false
     setIsReadyToPull(cache)
     setIsLock(true)
     setStartPosition(-1)
@@ -118,6 +125,7 @@ const Tab: FunctionComponent<TabPanelProps> = ({
     ) {
       return
     }
+    // alert(1)
     setPullDownBlockHeight(0)
     setTimeout(() => {
       setIsLock(false)
@@ -133,13 +141,32 @@ const Tab: FunctionComponent<TabPanelProps> = ({
     }
   }
 
+  const initStatus = () => {
+    isTouching = false
+    setIsReadyToPull(cache)
+    setIsLock(false)
+    setStartPosition(-1)
+    setPullDownStatus(0)
+    setPullDownBlockHeight(0)
+  }
+
+  useEffect(() => {
+    if (getEnv() !== 'WEAPP') window.addEventListener('touchcancel', initStatus)
+    return () => {
+      if (getEnv() !== 'WEAPP')
+        window.removeEventListener('touchcancel', initStatus)
+    }
+  }, [])
+
   return (
     <ScrollView
       onScroll={scrollHandler}
       onTouchMove={moveHandler}
       onTouchStart={touchStartHandler}
       onTouchEnd={touchEndHandler}
-      onScrollToUpper={event => scrollHandler(event, true)}
+      onScrollToUpper={event => {
+        if (getEnv() === 'WEAPP') scrollHandler(event, true)
+      }}
       onScrollToLower={async () => {
         if (disableOnScrollToLower) return
         if (onScrollToLower && !isOnScrollToLowerRunning) {
@@ -167,10 +194,14 @@ const Tab: FunctionComponent<TabPanelProps> = ({
       >
         {PullDownStatus[pullDownStatus]}
       </View>
-      <View className={isLock || pullDownBlockHeight > 0 ? 'listBlock' : ''}>
-        {children}
-      </View>
-      <View className='bottomText'>{ScrollDownStatus[scrollDownStatus]}</View>
+      {/* <View className={isLock || pullDownBlockHeight > 0 ? 'listBlock' : ''}> */}
+      {children}
+      {/* </View> */}
+      {bottomText !== false && (
+        <View className='bottomText'>
+          {bottomText || ScrollDownStatus[scrollDownStatus]}
+        </View>
+      )}
     </ScrollView>
   )
 }
