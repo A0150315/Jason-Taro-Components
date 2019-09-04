@@ -142,7 +142,7 @@ class Tab extends Taro.Component {
       {children}
       
       {bottomText !== false && <View className="bottomText">
-          {bottomText || ScrollDownStatus[scrollDownStatus]}
+          {bottomText === true ? ScrollDownStatus[scrollDownStatus] : bottomText}
         </View>}
     </ScrollView>;
   }
