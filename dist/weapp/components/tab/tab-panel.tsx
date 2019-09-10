@@ -183,10 +183,12 @@ const Tab: FunctionComponent<TabPanelProps> = ({
       className={containerStyles}
       style={style}
     >
+      {/* {pullDownBlockHeight > 0 ? false : 0} */}
       <View
         style={{
           height: `${pullDownBlockHeight}${isApp ? 'r' : ''}px`,
-          lineHeight: `${pullDownBlockHeight * 1.2}${isApp ? 'r' : ''}px`
+          lineHeight: `${pullDownBlockHeight * 1.2}${isApp ? 'r' : ''}px`,
+          fontSize: `${pullDownBlockHeight > 0 ? Taro.pxTransform(24) : 0}`
         }}
         className={`${'pullDownBlock'} ${
           isTouching ? '' : 'pullDownBlock_withTransition'

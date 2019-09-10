@@ -19,7 +19,7 @@
 }
 
 .pullDownBlock_withTransition {
-  transition: all .4s;
+  transition: height .4s,line-height .4s,font-size 0s .4s;
 }
 
 .bottomText {

@@ -132,9 +132,11 @@ class Tab extends Taro.Component {
         }, 500);
       }
     }} scrollY className={containerStyles} style={style}>
+      
       <View style={{
         height: `${pullDownBlockHeight}${isApp ? 'r' : ''}px`,
-        lineHeight: `${pullDownBlockHeight * 1.2}${isApp ? 'r' : ''}px`
+        lineHeight: `${pullDownBlockHeight * 1.2}${isApp ? 'r' : ''}px`,
+        fontSize: `${pullDownBlockHeight > 0 ? Taro.pxTransform(24) : 0}`
       }} className={`${'pullDownBlock'} ${isTouching ? '' : 'pullDownBlock_withTransition'}`}>
         {PullDownStatus[pullDownStatus]}
       </View>
