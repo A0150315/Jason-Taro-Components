@@ -165,10 +165,10 @@
   dependencies:
     uglify-js "^3.3.24"
 
-"@tarojs/router@1.3.15":
-  version "1.3.15"
-  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2frouter/-/router-1.3.15.tgz#8517d14809e14a685817a7fb2ada8c9304cd4b30"
-  integrity sha1-hRfRSAnhSmhYF6f7KtqMkwTNSzA=
+"@tarojs/router@1.3.27":
+  version "1.3.27"
+  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2frouter/-/router-1.3.27.tgz#332a12ef626106487a8b949bacc8bbc13e62fe6d"
+  integrity sha1-MyoS72JhBkh6i5SbrMi7wT5i/m0=
   dependencies:
     invariant "2.2.4"
     lodash "4.17.13"
