@@ -1,10 +1,10 @@
 import Nerv from "nervjs";
 import Taro, { useState, useCallback, useEffect } from "@tarojs/taro-h5";
-import { ScrollView, View } from '@tarojs/components';
-import classNames from 'classnames';
+import { ScrollView, View } from "@tarojs/components";
+import classNames from "classnames";
 import { getEnv } from "../../utils/utils";
-import './tab-panel.scss';
-const isApp = Taro.getEnv() !== 'WEB';
+import "./tab-panel.scss";
+const isApp = Taro.getEnv() !== "WEB";
 let cache = true;
 let isTouching = false;
 let isOnScrollToLowerRunning = false;
@@ -41,13 +41,13 @@ class Tab extends Taro.Component {
     const [isLock, setIsLock] = useState(false);
     const [pullDownStatus, setPullDownStatus] = useState(0);
     const [scrollDownStatus, setScrollDownStatus] = useState(1);
-    const containerStyles = classNames('scrollYBlock', className);
+    const containerStyles = classNames("scrollYBlock", className);
     const moveHandler = useCallback(event => {
       let maxHeight = 0;
       if (isApp) {
         maxHeight = 26.6666;
-      } else if (document.querySelector('html') !== null) {
-        maxHeight = document.querySelector('html').style.fontSize.slice(0, -2) * 1.0666667;
+      } else if (document.querySelector("html") !== null) {
+        maxHeight = document.querySelector("html").style.fontSize.slice(0, -2) * 1.0666667;
       }
       const time = isApp ? 0.5 : 0.2;
       let height = (event.touches[0].clientY - startPosition) * time;
@@ -113,13 +113,13 @@ class Tab extends Taro.Component {
       setPullDownBlockHeight(0);
     };
     useEffect(() => {
-      if (getEnv() !== 'WEAPP') window.addEventListener('touchcancel', initStatus);
+      if (getEnv() !== "WEAPP") window.addEventListener("touchcancel", initStatus);
       return () => {
-        if (getEnv() !== 'WEAPP') window.removeEventListener('touchcancel', initStatus);
+        if (getEnv() !== "WEAPP") window.removeEventListener("touchcancel", initStatus);
       };
     }, []);
     return <ScrollView onScroll={scrollHandler} onTouchMove={moveHandler} onTouchStart={touchStartHandler} onTouchEnd={touchEndHandler} onScrollToUpper={event => {
-      if (getEnv() === 'WEAPP') scrollHandler(event, true);
+      if (getEnv() === "WEAPP") scrollHandler(event, true);
     }} onScrollToLower={async () => {
       if (disableOnScrollToLower) return;
       if (onScrollToLower && !isOnScrollToLowerRunning) {
@@ -134,10 +134,10 @@ class Tab extends Taro.Component {
     }} scrollY className={containerStyles} style={style}>
       
       <View style={{
-        height: `${pullDownBlockHeight}${isApp ? 'r' : ''}px`,
-        lineHeight: `${pullDownBlockHeight * 1.2}${isApp ? 'r' : ''}px`,
+        height: `${pullDownBlockHeight}${isApp ? "r" : ""}px`,
+        lineHeight: `${pullDownBlockHeight * 1.2}${isApp ? "r" : ""}px`,
         fontSize: `${pullDownBlockHeight > 0 ? Taro.pxTransform(24) : 0}`
-      }} className={`${'pullDownBlock'} ${isTouching ? '' : 'pullDownBlock_withTransition'}`}>
+      }} className={`${"pullDownBlock"} ${isTouching ? "" : "pullDownBlock_withTransition"}`}>
         {PullDownStatus[pullDownStatus]}
       </View>
       

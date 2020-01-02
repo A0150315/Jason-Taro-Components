@@ -131,8 +131,8 @@ const Tab: FunctionComponent<TabProps> = ({
             <View
               className={moreTextStyles(index)}
               onClick={() => {
-                hideMask()
-                setCurrentIndex(index)
+                hideMask();
+                setCurrentIndex(index);
               }}
               key={`tab:${index}`}
             >
@@ -149,6 +149,7 @@ const Tab: FunctionComponent<TabProps> = ({
             scrollIntoView={`tab${currentIndex}`}
             scrollX
             className={tabWrapperStyles}
+            scrollWithAnimation
           >
             {tab.map((title, index) => (
               <Text
@@ -188,7 +189,7 @@ const Tab: FunctionComponent<TabProps> = ({
       <View
         className={outerScrollViewStyles}
         onTouchStart={event => {
-          startPosition = event.touches[0].pageX
+          startPosition = event.touches[0].pageX;
         }}
         onTouchMove={event => {
           if (
@@ -196,19 +197,19 @@ const Tab: FunctionComponent<TabProps> = ({
             !hasMoved &&
             currentIndex > 0
           ) {
-            setCurrentIndex(currentIndex - 1)
-            hasMoved = true
+            setCurrentIndex(currentIndex - 1);
+            hasMoved = true;
           } else if (
             event.touches[0].pageX - startPosition < -standard &&
             !hasMoved &&
             currentIndex < tab.length - 1
           ) {
-            setCurrentIndex(currentIndex + 1)
-            hasMoved = true
+            setCurrentIndex(currentIndex + 1);
+            hasMoved = true;
           }
         }}
         onTouchEnd={() => {
-          hasMoved = false
+          hasMoved = false;
         }}
       >
         {/* 列表 */}
@@ -223,7 +224,7 @@ const Tab: FunctionComponent<TabProps> = ({
         </View>
       </View>
     </View>
-  )
+  );
 }
 
 Tab.options = {

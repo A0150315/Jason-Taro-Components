@@ -75,7 +75,7 @@ class Tab extends Taro.Component {
       
       
       {isShowArrow ? <View className={selectorStyles}>
-          <ScrollView scrollIntoView={`tab${currentIndex}`} scrollX className={tabWrapperStyles}>
+          <ScrollView scrollIntoView={`tab${currentIndex}`} scrollX className={tabWrapperStyles} scrollWithAnimation>
             {tab.map((title, index) => <Text id={`tab${index}`} className={tabTextStyles(index, true)} onClick={() => setCurrentIndex(index)} key={`tab:${index}`}>
                 {title.length > 4 ? `${title.substr(0, 4)}...` : title}
               </Text>)}
