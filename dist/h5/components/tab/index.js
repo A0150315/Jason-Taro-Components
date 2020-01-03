@@ -1,9 +1,9 @@
 import Nerv from "nervjs";
 import { useState, useCallback, useEffect, useMemo } from "@tarojs/taro-h5";
-import { View, Text, Image, ScrollView } from '@tarojs/components';
-import classNames from 'classnames';
+import { View, Text, Image, ScrollView } from "@tarojs/components";
+import classNames from "classnames";
 import { getEnv } from "../../utils/utils";
-import './index.scss';
+import "./index.scss";
 let startPosition = 0;
 const standard = 100;
 let hasMoved = false;
@@ -13,43 +13,43 @@ class Tab extends Taro.Component {
     const {
       children: children
     } = this.props;
-    const { fixable = false, hasTop = false, className, style, tab = [], getIndex, mode } = this.props;
+    const { fixable = false, hasTop = false, index = 0, className, style, tab = [], getIndex, mode } = this.props;
 
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(index);
     const [isShowMore, setIsShowMore] = useState(false);
-    const [isShowArrow] = useState(mode !== 'common');
-    const containerStyles = classNames('container', className);
-    const selectorStyles = useMemo(() => classNames('selector', {
-      ['selector_fix']: fixable,
-      ['selector_paddingTop']: hasTop
+    const [isShowArrow] = useState(mode !== "common");
+    const containerStyles = classNames("container", className);
+    const selectorStyles = useMemo(() => classNames("selector", {
+      ["selector_fix"]: fixable,
+      ["selector_paddingTop"]: hasTop
     }), [fixable, hasTop]);
-    const outerScrollViewStyles = useMemo(() => classNames('outerScrollView', {
-      ['outerScrollView_padding']: fixable
+    const outerScrollViewStyles = useMemo(() => classNames("outerScrollView", {
+      ["outerScrollView_padding"]: fixable
     }), [fixable]);
-    const maskStyles = useMemo(() => classNames('mask', {
-      ['mask_show']: isShowMore
+    const maskStyles = useMemo(() => classNames("mask", {
+      ["mask_show"]: isShowMore
     }), [isShowMore]);
-    const moreBgStyles = useMemo(() => classNames('moreBg', {
-      ['moreBg_show']: isShowMore
+    const moreBgStyles = useMemo(() => classNames("moreBg", {
+      ["moreBg_show"]: isShowMore
     }), [isShowMore]);
-    const tabWrapperStyles = useMemo(() => classNames('tabWrapper', {
-      ['tabWrapper_common']: !isShowArrow
+    const tabWrapperStyles = useMemo(() => classNames("tabWrapper", {
+      ["tabWrapper_common"]: !isShowArrow
     }), [isShowArrow]);
-    const tabTextStyles = useCallback((index, canScroll = false) => classNames('tabText', {
-      ['tabText__highLight']: index === currentIndex,
-      ['tabText__noMargin']: !isShowArrow,
-      ['tabText__canScroll']: canScroll
+    const tabTextStyles = useCallback((index, canScroll = false) => classNames("tabText", {
+      ["tabText__highLight"]: index === currentIndex,
+      ["tabText__noMargin"]: !isShowArrow,
+      ["tabText__canScroll"]: canScroll
     }), [currentIndex, isShowArrow]);
-    const moreTextStyles = useCallback(index => classNames('moreTabText', {
-      ['moreTabText__highLight']: index === currentIndex
+    const moreTextStyles = useCallback(index => classNames("moreTabText", {
+      ["moreTabText__highLight"]: index === currentIndex
     }), [currentIndex]);
     const showMask = useCallback(() => setIsShowMore(true), []);
     const hideMask = useCallback(() => setIsShowMore(false), []);
     useEffect(() => {
-      if (getEnv() !== 'WEAPP' && document.querySelector(`#tab${currentIndex}`)) document.querySelector(`#tab${currentIndex}`).scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center'
+      if (getEnv() !== "WEAPP" && document.querySelector(`#tab${currentIndex}`)) document.querySelector(`#tab${currentIndex}`).scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
       });
       if (getIndex) getIndex(currentIndex);
       // eslint-disable-next-line

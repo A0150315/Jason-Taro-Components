@@ -6,7 +6,8 @@ import "./index.scss";
 
 export default class Index extends Component {
   state = {
-    list: [1, 2, 3, 2, 3, 2, 3, 1, 3, 1, 2, 3, 2, 3, 1, 3]
+    list: [1, 2, 3, 2, 3, 2, 3, 1, 3, 1, 2, 3, 2, 3, 1, 3],
+    index: 2
   };
   /**
    * 指定config的类型声明为: Taro.Config
@@ -20,10 +21,11 @@ export default class Index extends Component {
   };
 
   render() {
-    const { list } = this.state;
+    const { list, index } = this.state;
     return (
       <View className='wrapper'>
         <Tab
+          index={index}
           // hasTop
           // fixable
           tab={[
@@ -41,7 +43,7 @@ export default class Index extends Component {
           getIndex={getIndex => {
             console.log("getIndex", getIndex);
           }}
-          // mode='common'
+          mode='common'
         >
           {[1, 2, 3, 4].map((item, idx) => {
             return (
