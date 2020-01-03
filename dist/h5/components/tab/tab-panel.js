@@ -86,13 +86,13 @@ class Tab extends Taro.Component {
           await sleep(2000);
         }
         await sleep(500);
-        setPullDownStatus(0);
       } else if (pullDownStatus === 2 || pullDownStatus === 3 || pullDownStatus === 4) {
         return;
       }
       // alert(1)
       setPullDownBlockHeight(0);
-      setTimeout(() => {
+      setTimeout(async () => {
+        setPullDownStatus(0);
         setIsLock(false);
       }, 400);
     }, [onPullDown, pullDownStatus]);

@@ -1,34 +1,36 @@
-import { CSSProperties } from 'react'
+import { CSSProperties } from "react";
 import Taro, {
   FunctionComponent,
   useState,
   useCallback,
   useEffect,
   useMemo
-} from '@tarojs/taro'
-import { View, Text, Image, ScrollView } from '@tarojs/components'
-import classNames from 'classnames'
-import { getEnv } from 'utils/utils'
-import './index.scss'
+} from "@tarojs/taro";
+import { View, Text, Image, ScrollView } from "@tarojs/components";
+import classNames from "classnames";
+import { getEnv } from "utils/utils";
+import "./index.scss";
 
 interface TabProps {
-  className?: string
-  style?: string | CSSProperties
-  mode?: 'common'
-  children?: any
-  tab: string[]
-  getIndex?: (index: number) => void
-  fixable?: boolean
-  hasTop?: boolean
+  className?: string;
+  style?: string | CSSProperties;
+  mode?: "common";
+  index?: number;
+  children?: any;
+  tab: string[];
+  getIndex?: (index: number) => void;
+  fixable?: boolean;
+  hasTop?: boolean;
 }
 
-let startPosition = 0
-const standard = 100
-let hasMoved = false
+let startPosition = 0;
+const standard = 100;
+let hasMoved = false;
 
 const Tab: FunctionComponent<TabProps> = ({
   fixable = false,
   hasTop = false,
+  index = 0,
   className,
   style,
   children,
@@ -36,81 +38,81 @@ const Tab: FunctionComponent<TabProps> = ({
   getIndex,
   mode
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isShowMore, setIsShowMore] = useState(false)
-  const [isShowArrow] = useState(mode !== 'common')
-  const containerStyles = classNames('container', className)
+  const [currentIndex, setCurrentIndex] = useState(index);
+  const [isShowMore, setIsShowMore] = useState(false);
+  const [isShowArrow] = useState(mode !== "common");
+  const containerStyles = classNames("container", className);
 
   const selectorStyles = useMemo(
     () =>
-      classNames('selector', {
-        ['selector_fix']: fixable,
-        ['selector_paddingTop']: hasTop
+      classNames("selector", {
+        ["selector_fix"]: fixable,
+        ["selector_paddingTop"]: hasTop
       }),
     [fixable, hasTop]
-  )
+  );
 
   const outerScrollViewStyles = useMemo(
     () =>
-      classNames('outerScrollView', {
-        ['outerScrollView_padding']: fixable
+      classNames("outerScrollView", {
+        ["outerScrollView_padding"]: fixable
       }),
     [fixable]
-  )
+  );
 
   const maskStyles = useMemo(
     () =>
-      classNames('mask', {
-        ['mask_show']: isShowMore
+      classNames("mask", {
+        ["mask_show"]: isShowMore
       }),
     [isShowMore]
-  )
+  );
   const moreBgStyles = useMemo(
     () =>
-      classNames('moreBg', {
-        ['moreBg_show']: isShowMore
+      classNames("moreBg", {
+        ["moreBg_show"]: isShowMore
       }),
     [isShowMore]
-  )
+  );
 
   const tabWrapperStyles = useMemo(
     () =>
-      classNames('tabWrapper', {
-        ['tabWrapper_common']: !isShowArrow
+      classNames("tabWrapper", {
+        ["tabWrapper_common"]: !isShowArrow
       }),
     [isShowArrow]
-  )
+  );
 
   const tabTextStyles = useCallback(
     (index, canScroll = false) =>
-      classNames('tabText', {
-        ['tabText__highLight']: index === currentIndex,
-        ['tabText__noMargin']: !isShowArrow,
-        ['tabText__canScroll']: canScroll
+      classNames("tabText", {
+        ["tabText__highLight"]: index === currentIndex,
+        ["tabText__noMargin"]: !isShowArrow,
+        ["tabText__canScroll"]: canScroll
       }),
     [currentIndex, isShowArrow]
-  )
+  );
   const moreTextStyles = useCallback(
     index =>
-      classNames('moreTabText', {
-        ['moreTabText__highLight']: index === currentIndex
+      classNames("moreTabText", {
+        ["moreTabText__highLight"]: index === currentIndex
       }),
     [currentIndex]
-  )
+  );
 
-  const showMask = useCallback(() => setIsShowMore(true), [])
-  const hideMask = useCallback(() => setIsShowMore(false), [])
+  const showMask = useCallback(() => setIsShowMore(true), []);
+  const hideMask = useCallback(() => setIsShowMore(false), []);
 
   useEffect(() => {
-    if (getEnv() !== 'WEAPP' && document.querySelector(`#tab${currentIndex}`))
+    if (getEnv() !== "WEAPP" && document.querySelector(`#tab${currentIndex}`))
       document.querySelector(`#tab${currentIndex}`).scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-        inline: 'center'
-      })
-    if (getIndex) getIndex(currentIndex)
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
+      });
+    if (getIndex) getIndex(currentIndex);
     // eslint-disable-next-line
-  }, [currentIndex])
+  }, [currentIndex]);
 
   return (
     <View className={containerStyles} style={style}>
@@ -225,10 +227,10 @@ const Tab: FunctionComponent<TabProps> = ({
       </View>
     </View>
   );
-}
+};
 
 Tab.options = {
   addGlobalClass: true
-}
+};
 
-export default Tab
+export default Tab;
