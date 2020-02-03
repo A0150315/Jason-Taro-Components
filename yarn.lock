@@ -158,10 +158,10 @@
     node-sass "^4.12.0"
     scss-bundle "^2.5.1"
 
-"@tarojs/plugin-uglifyjs@1.3.15":
-  version "1.3.15"
-  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2fplugin-uglifyjs/-/plugin-uglifyjs-1.3.15.tgz#3c26e7c548e0fd06295411fe276d5195a7551290"
-  integrity sha1-PCbnxUjg/QYpVBH+J21RladVEpA=
+"@tarojs/plugin-uglifyjs@2.0.2":
+  version "2.0.2"
+  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2fplugin-uglifyjs/-/plugin-uglifyjs-2.0.2.tgz#1b79b934b6a4233f7c35207d301bd2bb3e2c7b73"
+  integrity sha1-G3m5NLakIz98NSB9MBvSuz4se3M=
   dependencies:
     uglify-js "^3.3.24"
 
