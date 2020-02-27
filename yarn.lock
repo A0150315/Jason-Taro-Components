@@ -7937,10 +7937,10 @@ style-search@^0.1.0:
   resolved "https://registry.fe.lai-ai.com:443/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
   integrity sha1-eVjHk+R+MuB9K1yv5cC/jhLneQI=
 
-stylelint-config-taro-rn@1.3.15:
-  version "1.3.15"
-  resolved "https://registry.fe.lai-ai.com:443/stylelint-config-taro-rn/-/stylelint-config-taro-rn-1.3.15.tgz#0087a0a5ee8340efdbbcee06ae9a96bc7c290cc6"
-  integrity sha1-AIegpe6DQO/bvO4GrpqWvHwpDMY=
+stylelint-config-taro-rn@2.0.5:
+  version "2.0.5"
+  resolved "https://registry.fe.lai-ai.com:443/stylelint-config-taro-rn/-/stylelint-config-taro-rn-2.0.5.tgz#2a9379bbf95e00019bfb2d8664ec17be688ed8e0"
+  integrity sha1-KpN5u/leAAGb+y2GZOwXvmiO2OA=
 
 stylelint-taro-rn@1.3.15:
   version "1.3.15"
