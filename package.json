@@ -36,7 +36,7 @@
     "@tarojs/taro": "1.3.15",
     "@tarojs/taro-alipay": "1.3.15",
     "@tarojs/taro-h5": "1.3.15",
-    "@tarojs/taro-qq": "1.3.15",
+    "@tarojs/taro-qq": "2.1.0",
     "@tarojs/taro-quickapp": "1.3.15",
     "@tarojs/taro-swan": "1.3.15",
     "@tarojs/taro-tt": "1.3.15",
