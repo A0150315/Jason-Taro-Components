@@ -349,9 +349,9 @@
   integrity sha1-DliuZnc9f9fDcqSTr/dAh47Jzqo=
 
 "@types/react@^16.4.6":
-  version "16.9.2"
-  resolved "https://registry.fe.lai-ai.com:443/@types%2freact/-/react-16.9.2.tgz#6d1765431a1ad1877979013906731aae373de268"
-  integrity sha1-bRdlQxoa0Yd5eQE5BnMarjc94mg=
+  version "16.9.27"
+  resolved "https://registry.fe.lai-ai.com:443/@types%2freact/-/react-16.9.27.tgz#7fc5db99e3ec3f21735b44d3560cff684856814a"
+  integrity sha1-f8XbmePsPyFzW0TTVgz/aEhWgUo=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
