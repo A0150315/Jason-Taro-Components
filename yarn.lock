@@ -177,13 +177,13 @@
     value-equal "0.4.0"
     warning "4.0.2"
 
-"@tarojs/taro-alipay@1.3.15":
-  version "1.3.15"
-  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2ftaro-alipay/-/taro-alipay-1.3.15.tgz#8b17b82e6be99d39e4b004f8bff234b5a3df2551"
-  integrity sha1-ixe4LmvpnTnksAT4v/I0taPfJVE=
+"@tarojs/taro-alipay@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2ftaro-alipay/-/taro-alipay-2.1.5.tgz#ec662fb9875a8e39c7e971e1dc94c8e1ab794ff7"
+  integrity sha1-7GYvuYdajjnH6XHh3JTI4at5T/c=
   dependencies:
-    "@tarojs/taro" "1.3.15"
-    "@tarojs/utils" "1.3.15"
+    "@tarojs/taro" "2.1.5"
+    "@tarojs/utils" "2.1.5"
     lodash "^4.17.10"
     prop-types "^15.6.1"
 
@@ -255,10 +255,22 @@
   dependencies:
     "@tarojs/utils" "1.3.15"
 
+"@tarojs/taro@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2ftaro/-/taro-2.1.5.tgz#9d6d14a3edcc19075846d7177d6e070b4736fca9"
+  integrity sha1-nW0Uo+3MGQdYRtcXfW4HC0c2/Kk=
+  dependencies:
+    "@tarojs/utils" "2.1.5"
+
 "@tarojs/utils@1.3.15":
   version "1.3.15"
   resolved "https://registry.fe.lai-ai.com:443/@tarojs%2futils/-/utils-1.3.15.tgz#0b869e8e0e9e34402cc59ed371588e857443a6a5"
   integrity sha1-C4aejg6eNEAsxZ7TcViOhXRDpqU=
+
+"@tarojs/utils@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2futils/-/utils-2.1.5.tgz#055cd8f8b240eeb1cee398ffbbe726ba7a49fcd5"
+  integrity sha1-BVzY+LJA7rHO45j/u+cmunpJ/NU=
 
 "@tarojs/webpack-runner@1.3.15":
   version "1.3.15"
