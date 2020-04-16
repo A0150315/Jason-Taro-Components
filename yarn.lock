@@ -238,13 +238,13 @@
     lodash "^4.17.10"
     prop-types "^15.6.1"
 
-"@tarojs/taro-weapp@1.3.15":
-  version "1.3.15"
-  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2ftaro-weapp/-/taro-weapp-1.3.15.tgz#9f2d4d623c44db890c26fad9e4e9db5fce547c04"
-  integrity sha1-ny1NYjxE24kMJvrZ5OnbX85UfAQ=
+"@tarojs/taro-weapp@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2ftaro-weapp/-/taro-weapp-2.1.5.tgz#df88d807ed8fc6f5df445fad9138f6c2ab409fb3"
+  integrity sha1-34jYB+2PxvXfRF+tkTj2wqtAn7M=
   dependencies:
-    "@tarojs/taro" "1.3.15"
-    "@tarojs/utils" "1.3.15"
+    "@tarojs/taro" "2.1.5"
+    "@tarojs/utils" "2.1.5"
     lodash "^4.17.10"
     prop-types "^15.6.1"
 
@@ -255,10 +255,22 @@
   dependencies:
     "@tarojs/utils" "1.3.15"
 
+"@tarojs/taro@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2ftaro/-/taro-2.1.5.tgz#9d6d14a3edcc19075846d7177d6e070b4736fca9"
+  integrity sha1-nW0Uo+3MGQdYRtcXfW4HC0c2/Kk=
+  dependencies:
+    "@tarojs/utils" "2.1.5"
+
 "@tarojs/utils@1.3.15":
   version "1.3.15"
   resolved "https://registry.fe.lai-ai.com:443/@tarojs%2futils/-/utils-1.3.15.tgz#0b869e8e0e9e34402cc59ed371588e857443a6a5"
   integrity sha1-C4aejg6eNEAsxZ7TcViOhXRDpqU=
+
+"@tarojs/utils@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.fe.lai-ai.com:443/@tarojs%2futils/-/utils-2.1.5.tgz#055cd8f8b240eeb1cee398ffbbe726ba7a49fcd5"
+  integrity sha1-BVzY+LJA7rHO45j/u+cmunpJ/NU=
 
 "@tarojs/webpack-runner@1.3.15":
   version "1.3.15"
