@@ -357,9 +357,9 @@
     csstype "^2.2.0"
 
 "@types/webpack-env@^1.13.6":
-  version "1.14.0"
-  resolved "https://registry.fe.lai-ai.com:443/@types%2fwebpack-env/-/webpack-env-1.14.0.tgz#8edfc5f8e6eae20eeed3ca0d02974ed4ee5e4efc"
-  integrity sha1-jt/F+Obq4g7u08oNApdO1O5eTvw=
+  version "1.15.2"
+  resolved "https://registry.fe.lai-ai.com:443/@types%2fwebpack-env/-/webpack-env-1.15.2.tgz#927997342bb9f4a5185a86e6579a0a18afc33b0a"
+  integrity sha1-knmXNCu59KUYWobmV5oKGK/DOwo=
 
 "@typescript-eslint/experimental-utils@1.13.0":
   version "1.13.0"
