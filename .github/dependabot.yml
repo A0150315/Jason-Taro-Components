@@ -1,0 +1,24 @@
+version: 2
+registries:
+  git-git-lai-ai-com:
+    type: git
+    url: https://git.lai-ai.com
+    username: tanjianqing
+    password: "${{secrets.GIT_GIT_LAI_AI_COM_PASSWORD}}"
+  npm-registry-registry-fe-lai-ai-com:
+    type: npm-registry
+    url: https://registry.fe.lai-ai.com
+    username: "${{secrets.NPM_REGISTRY_REGISTRY_FE_LAI_AI_COM_USERNAME}}"
+    password: "${{secrets.NPM_REGISTRY_REGISTRY_FE_LAI_AI_COM_PASSWORD}}"
+
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "21:00"
+  open-pull-requests-limit: 10
+  target-branch: develop
+  registries:
+  - npm-registry-registry-fe-lai-ai-com
+  - git-git-lai-ai-com
